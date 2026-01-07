@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+elevenlabs
+python-dotenv
+soundfile
+numpy
+librosa
+moviepy
