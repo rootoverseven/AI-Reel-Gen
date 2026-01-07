@@ -72,9 +72,5 @@ node_modules/
 output/
 audio/
 frontend/node_modules/
-node_modules/
-*.mp4
-*.ttf
-*.png
 venv/
 __pycache__/
