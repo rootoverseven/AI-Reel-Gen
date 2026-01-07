@@ -1,0 +1,74 @@
+{
+    "audio_files": [
+        {
+            "path": "audio/dialogue_0.mp3",
+            "speaker": "Suraj",
+            "duration": 5.91,
+            "text": "🤔 भाभी! ये Webhook और WebSocket में फर्क क्या है? Client के लिए chatbot 🤖 बना रहा हूँ!"
+        },
+        {
+            "path": "audio/dialogue_1.mp3",
+            "speaker": "Savita",
+            "duration": 6.05,
+            "text": "अरे सूरज… तू अभी भी confuse है? 🤔 Webhook और WebSocket का फर्क ना समझा, तो dev किस बात का! 😏"
+        },
+        {
+            "path": "audio/dialogue_2.mp3",
+            "speaker": "Suraj",
+            "duration": 1.61,
+            "text": "भाभी pls simple में बताओ… 🙏"
+        },
+        {
+            "path": "audio/dialogue_3.mp3",
+            "speaker": "Savita",
+            "duration": 1.4,
+            "text": "ठीक है सुन, ध्यान से 👀"
+        },
+        {
+            "path": "audio/dialogue_4.mp3",
+            "speaker": "Savita",
+            "duration": 9.709977,
+            "text": "Webhook मतलब - “जब काम हो जाए, तब मुझे call कर देना” जैसे मैं तुझे बोलूँ — घर के नीचे आना तो miss call देना 📞 One-time. 🚀"
+        },
+        {
+            "path": "audio/dialogue_5.mp3",
+            "speaker": "Suraj",
+            "duration": 0.9,
+            "text": "और WebSocket? 🤨"
+        },
+        {
+            "path": "audio/dialogue_6.mp3",
+            "speaker": "Savita",
+            "duration": 6.22,
+            "text": "WebSocket तो full live connection है बाबू 😌. जैसे late-night call - जो मन में आए तुरंत बोल दो।\nServer और client दोनों real-time gossip mode में! 💬🔥"
+        },
+        {
+            "path": "audio/dialogue_7.mp3",
+            "speaker": "Suraj",
+            "duration": 1.4,
+            "text": "तो notifications के लिए Webhook? 🔔"
+        },
+        {
+            "path": "audio/dialogue_8.mp3",
+            "speaker": "Savita",
+            "duration": 3.43,
+            "text": "हाँ! Payment success, order placed — बस एक knock 🔔\nपर chat apps, trading apps, live scores? ⚡\nवहाँ WebSocket चाहिए… लगातार touch में रहने के लिए 😉"
+        },
+        {
+            "path": "audio/dialogue_9.mp3",
+            "speaker": "Suraj",
+            "duration": 1.17,
+            "text": "अब clear हो गया भाभी! 🙌"
+        },
+        {
+            "path": "audio/dialogue_10.mp3",
+            "speaker": "Savita",
+            "duration": 0.84,
+            "text": "Good 😎\nअब comment करो तुम लोग कौन से project पर काम कर रहे हो? 👇"
+        }
+    ],
+    "voice_map": {
+        "Savita": "IdRW0GWvYFZcsf742E1w",
+        "Suraj": "6tc9rOFMURVIqzk0oGJW"
+    }
+}

@@ -1,0 +1,17 @@
+Suraj:भाभी! ये CI/CD pipeline क्या है? मेरे deploy पे तो रोज़ system crash हो रहा है!
+
+Savita:ओह Suraj! तू ना deploy करता है ऐसे जैसे शादी से पहले suhaagraat सेट करे बिना ही entry मार दे! 😏
+
+Suraj:मतलब?
+
+Savita:CI/CD pipeline वो romantic planning है जिससे deploy में ना कोई लड़ाई, ना delay – बस smooth entry! CI यानि Continuous Integration – रोज़ के code को प्यार से मिलाना, जैसे हर शाम romantic date पे जाना ❤️ CD मतलब Continuous Delivery – हर commit के बाद, तेरा code automatically production तक पहुँचे, जैसे बिना बोले भाभी तेरे दिल तक! 😉
+
+Suraj:ओह तो हर बार testing, build, deploy सब automatic?
+
+Savita:Exactly! Manual deploy ऐसा है जैसे हर रात bed सजाना पड़े – थकाऊ, unpredictable और romantic मूड gone! CI/CD pipeline वो ready-made bed है – बस आओ और action चालू! 😜
+
+Suraj:भाभी मैं भी pipeline बनाऊँ क्या?
+
+Savita:पहले code stable बना, फिर pipeline बना वरना तेरे deploy तो तेरी dating history जैसे crash होते रहेंगे! 😂
+
+Savita:इस reel को उस developer को भेजो जो अभी भी production पे FTP से deploy करता है! और comment करो “Pipeline Partner” अगर तुम्हारी भी deploy life smooth है वरना भाभी सिखा देगी 😉💋

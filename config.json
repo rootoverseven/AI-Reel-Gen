@@ -1,0 +1,9 @@
+{
+    "script": "Suraj: 🤔 भाभी! ये Webhook और WebSocket में फर्क क्या है? Client के लिए chatbot 🤖 बना रहा हूँ!\nSavita: अरे सूरज… तू अभी भी confuse है? 🤔 Webhook और WebSocket का फर्क ना समझा, तो dev किस बात का! 😏\n\nSuraj: भाभी pls simple में बताओ… 🙏\n\nSavita: ठीक है सुन, ध्यान से 👀\n\nSavita:Webhook मतलब - “जब काम हो जाए, तब मुझे call कर देना” जैसे मैं तुझे बोलूँ — घर के नीचे आना तो miss call देना 📞 One-time. 🚀\n\nSuraj: और WebSocket? 🤨\n\nSavita: WebSocket तो full live connection है बाबू 😌. जैसे late-night call - जो मन में आए तुरंत बोल दो।\nServer और client दोनों real-time gossip mode में! 💬🔥\n\nSuraj: तो notifications के लिए Webhook? 🔔\n\nSavita: हाँ! Payment success, order placed — बस एक knock 🔔\nपर chat apps, trading apps, live scores? ⚡\nवहाँ WebSocket चाहिए… लगातार touch में रहने के लिए 😉\n\nSuraj: अब clear हो गया भाभी! 🙌\n\nSavita: Good 😎\nअब comment करो तुम लोग कौन से project पर काम कर रहे हो? 👇",
+    "savita_img": "savita.png",
+    "suraj_img": "suraj.png",
+    "savita_voice_name": "Savvy 2.0",
+    "suraj_voice_name": "sURAJ 2.0",
+    "savita_voice_id": "IdRW0GWvYFZcsf742E1w",
+    "suraj_voice_id": "6tc9rOFMURVIqzk0oGJW"
+}
