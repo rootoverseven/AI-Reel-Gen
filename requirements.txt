@@ -1,12 +1,16 @@
 # --- Core dependencies ---
-fastapi
-uvicorn
-pydantic
-elevenlabs
-python-dotenv
-soundfile
-numpy
-librosa
+fastapi==0.124.4
+uvicorn==0.38.0
+pydantic==2.12.5
+elevenlabs==2.26.1
+python-dotenv==1.2.1
+soundfile==0.13.1
+numpy==2.3.5
+librosa==0.11.0
+
+# --- Optional/Helper dependencies ---
+# Required for trimVid.py
+moviepy
 
 # --- System Requirements (Not pip installable) ---
 # This project requires FFmpeg to be installed on your system.
