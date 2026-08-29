@@ -19,7 +19,9 @@ function App() {
         setVoices(voices);
         if (voices.length > 0) {
           setSavitaVoice(voices[0].id);
-          setSurajVoice(voices[0].id);
+        }
+        if (voices.length > 1) {
+          setSurajVoice(voices[1].id);
         }
       })
       .catch(err => console.error("Failed to load voices", err));
