@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { fetchVoices, generateScript as generateScriptApi, generateVideo as generateVideoApi } from './api.js';
 import { Play, Download, Wand2, Loader2, Mic } from 'lucide-react';
 
 function App() {
@@ -14,12 +14,14 @@ function App() {
 
   useEffect(() => {
     // Fetch available voices on mount
-    axios.get('/voices')
-      .then(res => {
-        setVoices(res.data);
-        if (res.data.length > 0) {
-          setSavitaVoice(res.data[0].id);
-          setSurajVoice(res.data[0].id);
+    fetchVoices()
+      .then(voices => {
+        setVoices(voices);
+        if (voices.length > 0) {
+          setSavitaVoice(voices[0].id);
+        }
+        if (voices.length > 1) {
+          setSurajVoice(voices[1].id);
         }
       })
       .catch(err => console.error("Failed to load voices", err));
@@ -30,8 +32,8 @@ function App() {
     setLoading(true);
     setStatus('Generating script...');
     try {
-      const res = await axios.post('/generate-script', { topic });
-      setScript(res.data.script);
+      const scriptText = await generateScriptApi(topic);
+      setScript(scriptText);
     } catch (err) {
       alert("Error generating script");
       console.error(err);
@@ -46,18 +48,16 @@ function App() {
     setLoading(true);
     setStatus('Synthesizing Audio & Rendering Video (This may take a minute)...');
     try {
-      const res = await axios.post('/generate-video', {
+      const videoPath = await generateVideoApi({
         script,
-        savita_voice_id: savitaVoice,
-        suraj_voice_id: surajVoice,
-        savita_img: "savita.png",
-        suraj_img: "suraj.png"
+        savitaVoice,
+        surajVoice,
       });
       // The backend returns a local path. Since we are local, we can't easily serve it 
       // without the backend serving static files. 
       // For MVP, we just show the path.
-      setVideoPath(res.data.video_path);
-      alert(`Video Generated Successfully at: ${res.data.video_path}`);
+      setVideoPath(videoPath);
+      alert(`Video Generated Successfully at: ${videoPath}`);
     } catch (err) {
       alert("Error generating video");
       console.error(err);
