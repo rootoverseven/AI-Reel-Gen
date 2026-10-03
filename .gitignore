@@ -74,3 +74,12 @@ audio/
 frontend/node_modules/
 venv/
 __pycache__/
+.pytest_cache/
+*.err
+
+# User-uploaded library assets (only the shipped defaults are tracked)
+assets/backgrounds/*
+!assets/backgrounds/tech_bg.mp4
+assets/characters/*
+!assets/characters/savita.png
+!assets/characters/suraj.png

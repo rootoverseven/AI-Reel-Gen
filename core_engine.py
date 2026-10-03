@@ -11,6 +11,9 @@ import librosa
 
 load_dotenv()
 
+ENGINE_DIR = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_BG_VIDEO = os.path.join(ENGINE_DIR, "assets", "backgrounds", "tech_bg.mp4")
+
 elevenlabs = ElevenLabs(api_key=os.getenv("ELEVENLABS_API_KEY"))
 
 # Audio files management
@@ -252,22 +255,25 @@ def generate_srt(audio_files):
 
 def create_synced_video_with_assets(audio_files, final_audio_path, output_video, total_duration, 
                                   bg_video, savita_img, suraj_img, srt_path):
-    # Dynamic path for subtitles text file in current directory
+    # Make every path absolute so the result does not depend on the cwd.
+    bg_video = os.path.abspath(bg_video)
+    savita_img = os.path.abspath(savita_img)
+    suraj_img = os.path.abspath(suraj_img)
+    final_audio_path = os.path.abspath(final_audio_path)
+    output_video = os.path.abspath(output_video)
+    srt_path = os.path.abspath(srt_path)
+
     # Use forward slashes to avoid escape hell, and only escape the colon for the filter
-    current_dir = os.getcwd().replace('\\', '/')
     # FFmpeg subtitles filter syntax quirk: drive letter colon needs escaping 'C\:/path'
-    
-    # Ensure srt_path is absolute for FFmpeg
-    srt_abs_path = os.path.abspath(srt_path).replace('\\', '/')
+    srt_abs_path = srt_path.replace('\\', '/')
     escaped_srt_path = srt_abs_path.replace(':', '\\:')
-    
-    escaped_logo_path = "logo.png"
+
+    logo_path = os.path.join(ENGINE_DIR, "logo.png")
     
     # Background video processing with white bar and text
     filter_parts = []
     filter_parts.append(
-        f'[0:v]loop=-1:size=ceil({total_duration}*30):start=0,'
-        f'scale=1080:1920:force_original_aspect_ratio=decrease,'
+        f'[0:v]scale=1080:1920:force_original_aspect_ratio=decrease,'
         f'pad=1080:1920:(ow-iw)/2:(oh-ih)/2,'
         f'setpts=PTS-STARTPTS,'
         f'drawbox=y=0:color=white@1:width=1080:height=350:t=fill,'
@@ -316,16 +322,16 @@ def create_synced_video_with_assets(audio_files, final_audio_path, output_video,
     )
     filter_complex = ';'.join(filter_parts)
     cmd = [
-        'ffmpeg', '-y', '-i', bg_video, '-i', savita_img, '-i', suraj_img, '-i', escaped_logo_path.replace('\\\\', '\\'), '-i', final_audio_path,
+        'ffmpeg', '-y', '-stream_loop', '-1', '-i', bg_video, '-i', savita_img, '-i', suraj_img, '-i', logo_path, '-i', final_audio_path,
         '-filter_complex', filter_complex, '-map', '[out]', '-map', '4:a', '-c:v', 'libx264', '-c:a', 'aac',
         '-t', str(total_duration), '-r', '30', '-b:v', '2M', output_video
     ]
     try:
         # Check if logo file exists
-        logo_file = escaped_logo_path.replace('\\\\', '\\')
-        if not os.path.exists(logo_file):
-            raise FileNotFoundError(f"Logo file not found at {logo_file}")
-        result = subprocess.run(cmd, check=True, capture_output=True, text=True)
+        if not os.path.exists(logo_path):
+            raise FileNotFoundError(f"Logo file not found at {logo_path}")
+        # cwd=ENGINE_DIR so that fontfile=arial.ttf resolves
+        result = subprocess.run(cmd, check=True, capture_output=True, text=True, cwd=ENGINE_DIR)
         print(f"FFmpeg output: {result.stdout}")
         return output_video
     except subprocess.CalledProcessError as e:
@@ -336,14 +342,25 @@ def create_synced_video_with_assets(audio_files, final_audio_path, output_video,
         print(f"Error: {e}")
         return None
 
-def create_video(audio_files, final_audio_path, savita_img, suraj_img, output_dir="output"):
+def _resolve_character_img(path):
+    """Characters moved to assets/characters/; keep old bare names (config.json, Tkinter app) working."""
+    if os.path.exists(path):
+        return path
+    moved = os.path.join(ENGINE_DIR, "assets", "characters", os.path.basename(path))
+    return moved if os.path.exists(moved) else path
+
+def create_video(audio_files, final_audio_path, savita_img, suraj_img, output_dir="output", bg_video=None):
+    bg_video = bg_video or DEFAULT_BG_VIDEO
+    savita_img = _resolve_character_img(savita_img)
+    suraj_img = _resolve_character_img(suraj_img)
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     output_video = f"{output_dir}/reel_{uuid.uuid4()}.mp4"
     srt_content = generate_srt(audio_files)
-    srt_path = "subtitles.srt"
+    # One SRT per job, next to the reel (no shared ./subtitles.srt)
+    srt_path = os.path.splitext(output_video)[0] + ".srt"
     with open(srt_path, 'w', encoding='utf-8') as f:
         f.write(srt_content)
     total_duration = sum(audio['duration'] for audio in audio_files)
     return create_synced_video_with_assets(audio_files, final_audio_path, output_video, total_duration, 
-                                         "tech_bg.mp4", savita_img, suraj_img, srt_path)
+                                         bg_video, savita_img, suraj_img, srt_path)

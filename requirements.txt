@@ -7,6 +7,7 @@ python-dotenv==1.2.1
 soundfile==0.13.1
 numpy==2.3.5
 librosa==0.11.0
+python-multipart==0.0.32  # required by FastAPI for file uploads
 
 # --- Optional/Helper dependencies ---
 # Required for trimVid.py
